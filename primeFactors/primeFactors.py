@@ -20,7 +20,6 @@ def pFactors(number: int):
             if (isPrime(i)):
                 if (clean % i == 0):
                     if neg:
-                        neg = False
                         return [-i] + pFactors(int(clean / i))
                     return [i] + pFactors(int(clean / i))
     
