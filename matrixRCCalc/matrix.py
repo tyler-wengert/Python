@@ -34,8 +34,25 @@ def chkVal(matrix: str, size: int) -> int:
     
     return val
 
-def compare(row: int, col: int):
-    pass
+def compare(rows: list, cols: list):
+    crow = 0
+    ccol = 0
+
+    for ind, val in enumerate(rows):
+        if val % 2 != 0:
+            if crow != 0:
+                return 0
+            crow = ind
+
+    for ind, val in enumerate(cols):
+        if val % 2 != 0:
+            if ccol != 0:
+                return 0
+            ccol = ind
+            
+    if crow == 0 and ccol == 0:
+        return 1
+    return crow, ccol
 
 def calcParity() -> str:
     
@@ -45,8 +62,15 @@ def calcParity() -> str:
     rowvals = chkVal(clean, size)
     colvals = chkVal(rows, size)
 
-    compare(rowvals, colvals)
-        
+    result = compare(rowvals, colvals)
+
+    if result == 0:
+        return 'Corrupt'
+    elif result == 1:
+        return 'Matrix has parity'
+    else:
+        print(result)
+        return 'Change bit (' + str(result[0]) + ',' + str(result[1]) + ')'
             
 
-result = calcParity()
+print(calcParity())
